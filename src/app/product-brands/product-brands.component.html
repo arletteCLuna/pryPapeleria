@@ -1,0 +1,37 @@
+<section class="p-8 bg-gray-50">
+    <div class="container mx-auto">
+      <h1 class="text-3xl font-bold mb-4">Marcas Disponibles para {{ productType }}</h1>
+      
+      <!-- Campo de Búsqueda -->
+      <div class="relative mb-6">
+        <input 
+          type="text" 
+          [(ngModel)]="searchTerm" 
+          (input)="filterBrands()" 
+          placeholder="Buscar marcas..."
+          class="w-full md:w-1/2 p-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-de2183 transition duration-300"
+        />
+        <!-- Lista de Sugerencias -->
+        <ul *ngIf="suggestions.length > 0" class="absolute bg-white border border-gray-300 rounded-lg w-full md:w-1/2 mt-1 shadow-lg z-10">
+          <li 
+            *ngFor="let suggestion of suggestions" 
+            (click)="selectSuggestion(suggestion)"
+            class="p-2 cursor-pointer hover:bg-gray-200 transition duration-300"
+          >
+            {{ suggestion }}
+          </li>
+        </ul>
+      </div>
+  
+      <!-- Resultados Filtrados -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div *ngFor="let brand of filteredBrands" class="bg-white shadow-lg rounded-lg overflow-hidden transition-transform transform hover:scale-105">
+          <img [src]="brand.image" alt="{{brand.name}}" class="w-full h-64 object-cover">
+          <div class="p-6">
+            <h2 class="text-2xl font-semibold mb-4">{{brand.name}}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
